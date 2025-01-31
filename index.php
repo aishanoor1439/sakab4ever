@@ -281,30 +281,9 @@ $user_data = mysqli_fetch_array($run);
             ?>
               <ul class="footer-site-social">
                 <?php
-                if ($user_data['facebook'] != '') {
-                ?>
-                  <li><a href="<?= $user_data['facebook'] ?>">Facebook</a></li>
-                <?php
-                }
-                ?>
-                <?php
-                if ($user_data['instagram'] != '') {
-                ?>
-                  <li><a href="<?= $user_data['instagram'] ?>">Instagram</a></li>
-                <?php
-                }
-                ?>
-                <?php
                 if ($user_data['linkedin'] != '') {
                 ?>
-                  <li><a href="<?= $user_data['linkedin'] ?>">Linkedin</a></li>
-                <?php
-                }
-                ?>
-                <?php
-                if ($user_data['skype'] != '') {
-                ?>
-                  <li><a href="<?= $user_data['skype'] ?>">Skype</a></li>
+                  <li><a href="<?= $user_data['linkedin'] ?>">LinkedIn</a></li>
                 <?php
                 }
                 ?>
@@ -312,6 +291,34 @@ $user_data = mysqli_fetch_array($run);
                 if ($user_data['twitter'] != '') {
                 ?>
                   <li><a href="<?= $user_data['twitter'] ?>">Twitter</a></li>
+                <?php
+                }
+                ?>
+                <?php
+                if ($user_data['facebook'] != '') {
+                ?>
+                  <li><a href="<?= $user_data['facebook'] ?>">Facebook</a></li>
+                <?php
+                }
+                ?>
+                <?php
+                if ($user_data['youtube'] != '') {
+                ?>
+                  <li><a href="<?= $user_data['youtube'] ?>">YouTube</a></li>
+                <?php
+                }
+                ?>
+                <?php
+                if ($user_data['email'] != '') {
+                ?>
+                  <li><a href="mailto:<?= $user_data['email'] ?>">Email</a></li>
+                <?php
+                }
+                ?>
+                <?php
+                if ($user_data['dribble'] != '') {
+                ?>
+                  <li><a href="<?= $user_data['dribble'] ?>">Dribble</a></li>
                 <?php
                 }
                 ?>

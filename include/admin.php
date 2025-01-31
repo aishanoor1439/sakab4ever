@@ -23,7 +23,33 @@ if (isset($_POST['update-home-section'])) {
               title = '$title', 
               subtitle = '$subtitle', 
               show_social_icons = '$show_social_icons',
-              hero_image = '$hero_image'
+              hero_image = '$imagename'
+              WHERE id = 1";
+
+    $run = mysqli_query($db, $query);
+
+    if ($run) {
+        echo "<script>alert('Update successful!'); window.location.href='../admin/template/index.php';</script>";
+    }
+}
+
+// Social-icons updation
+if (isset($_POST['update-social-icons'])) {
+    // print_r($_POST);
+    $dribble = mysqli_real_escape_string($db, $_POST['dribble']);
+    $email = mysqli_real_escape_string($db, $_POST['email']);
+    $linkedin = mysqli_real_escape_string($db, $_POST['linkedin']);
+    $facebook = mysqli_real_escape_string($db, $_POST['facebook']);
+    $twitter = mysqli_real_escape_string($db, $_POST['twitter']);
+    $youtube = mysqli_real_escape_string($db, $_POST['youtube']);
+
+    $query = "UPDATE icon_control SET 
+              dribble = '$dribble', 
+              email = '$email',
+              linkedin = '$linkedin',
+              facebook = '$facebook',
+              twitter = '$twitter',
+              youtube = '$youtube'
               WHERE id = 1";
 
     $run = mysqli_query($db, $query);
@@ -62,3 +88,4 @@ if (isset($_POST['update-about-section'])) {
         echo "<script>alert('Update successful!'); window.location.href='../admin/template/index.php';</script>";
     }
 }
+

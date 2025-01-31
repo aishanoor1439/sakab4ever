@@ -216,7 +216,7 @@ $user_data = mysqli_fetch_array($run);
           <!-- home-section-settings -->
           <div class="card-body">
             <h4 class="card-title">Home Page Settings</h4>
-            <form class="forms-sample" action="../../include/admin.php" method="post">
+            <form class="forms-sample" action="../../include/admin.php" method="post" enctype="multipart/form-data">
               <div class="form-group">
                 <label for="exampleInputUsername1">Headline</label>
                 <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Username" value="<?= $user_data['title'] ?>" name="title">
@@ -227,20 +227,20 @@ $user_data = mysqli_fetch_array($run);
               </div>
               <div class="form-group">
                 <label>Banner</label>
-                <input type="file" id="file-upload" class="file-upload-default form-control" name="hero_image" style="display: none;">
+                <input type="file" id="upload-file" class="file-upload-default form-control" name="hero_image" style="display: none;">
                 <div class="input-group col-xs-12">
-                  <input type="text" class="form-control file-upload-info" placeholder="<?= $user_data['hero_image'] ?>" readonly>
+                  <input type="text" id="upload-file-info" class="form-control file-upload-info" placeholder="<?= $user_data['hero_image'] ?>" readonly>
                   <span class="input-group-append">
-                    <button class="file-upload-browse btn btn-outline-primary" type="button" onclick="document.getElementById('file-upload').click();"><i class="mdi mdi-upload btn-icon-prepend"></i>Upload</button>
+                    <button class="file-upload-browse btn btn-outline-primary" type="button" onclick="document.getElementById('upload-file').click();"><i class="mdi mdi-upload btn-icon-prepend"></i>Upload</button>
                   </span>
                 </div>
               </div>
               <!-- upload button functionality -->
               <script>
                 $(document).ready(function() {
-                  $('#file-upload').change(function() {
-                    var fileName = $(this).val().split('\\').pop();
-                    $('.file-upload-info').val(fileName);
+                  $('#upload-file').change(function() {
+                    var FileName = $(this).val().split('\\').pop();
+                    $('#upload-file-info').val(FileName);
                   });
                 });
               </script>
@@ -250,10 +250,123 @@ $user_data = mysqli_fetch_array($run);
                     type="checkbox"
                     class="form-check-input"
                     name="show_social_icons"
+                    id="show_social_icons"
                     <?php if ($user_data['show_social_icons'] != 0) echo 'checked'; ?>>
                   Social Icons <i class="input-helper"></i>
                 </label>
               </div>
+              <!-- social-icons-setting -->
+              <form class="forms-sample" action="../../include/admin.php" method="post">
+                <div class="row" id="social_icons" style="display: none;">
+                  <div class="col-md-6 grid-margin stretch-card mt-3">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title">Networking and Communication</h4>
+                        <div class="template-demo">
+                          <!-- Form groups for social icons -->
+                          <!-- Dribble -->
+                          <div class="form-group">
+                            <label>Dribble</label>
+                            <div class="input-group col-xs-12">
+                              <span class="input-group-prepend">
+                                <button type="button" class="btn btn-social-icon btn-outline-dribbble" for="custom-switch-1" name="dribble"><i class="mdi mdi-dribbble"></i></button>
+                              </span>
+                              <input type="text" id="dribble-link" class="form-control" placeholder="<?= $user_data['dribble'] ?>" name="dribble">
+                            </div>
+                          </div>
+                          <!-- Email -->
+                          <div class="form-group">
+                            <label>Email</label>
+                            <div class="input-group col-xs-12">
+                              <input type="text" id="email" class="form-control" placeholder="<?= $user_data['email'] ?>">
+                              <span class="input-group-append">
+                                <button type="button" class="btn btn-social-icon btn-outline-success" for="custom-switch-2" name="email" name="email">
+                                  <i class="mdi mdi-email-open"></i>
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                          <!-- LinkedIn -->
+                          <div class="form-group">
+                            <label>LinkedIn</label>
+                            <div class="input-group col-xs-12">
+                              <span class="input-group-prepend">
+                                <button type="button" class="btn btn-social-icon btn-outline-linkedin" for="custom-switch-5" name="linkedin"><i class="mdi mdi-linkedin"></i></button>
+                              </span>
+                              <input type="text" id="linkedin-link" class="form-control" placeholder="<?= $user_data['linkedin'] ?>" name="linkedin">
+                            </div>
+                          </div>
+                          <button type="submit" class="btn btn-warning btn-icon-text" name="update-social-icons" value="update">
+                            <i class="mdi mdi-reload btn-icon-prepend" name="update-social-icons"></i> Update </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 grid-margin stretch-card mt-3">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title">Engagement and Branding</h4>
+                        <div class="template-demo">
+                          <!-- Form groups for social icons -->
+                          <!-- Facebook -->
+                          <div class="form-group">
+                            <label>Facebook</label>
+                            <div class="input-group col-xs-12">
+                              <span class="input-group-prepend">
+                                <button type="button" class="btn btn-social-icon btn-outline-facebook" for="custom-switch-3" name="facebook"><i class="mdi mdi-facebook"></i></button>
+                              </span>
+                              <input type="text" id="facebook-link" class="form-control" placeholder="<?= $user_data['facebook'] ?>" name="facebook">
+                            </div>
+                          </div>
+                          <!-- Twitter -->
+                          <div class="form-group">
+                            <label>Twitter</label>
+                            <div class="input-group col-xs-12">
+                              <input type="text" id="twitter-link" class="form-control" placeholder="<?= $user_data['twitter'] ?>" name="twitter">
+                              <span class="input-group-append">
+                                <button type="button" class="btn btn-social-icon btn-outline-twitter" for="custom-switch-6" name="twitter">
+                                  <i class="mdi mdi-twitter"></i>
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                          <!-- Youtube -->
+                          <div class="form-group">
+                            <label>Youtube</label>
+                            <div class="input-group col-xs-12">
+                              <span class="input-group-prepend">
+                                <button type="button" class="btn btn-social-icon btn-outline-youtube" for="custom-switch-7" name="youtube"><i class="mdi mdi-youtube"></i></button>
+                              </span>
+                              <input type="text" id="youtube-link" class="form-control" placeholder="<?= $user_data['youtube'] ?>" name="youtube">
+                            </div>
+                          </div>
+                          <button type="submit" class="btn btn-warning btn-icon-text" name="update-social-icons" value="update">
+                            <i class="mdi mdi-reload btn-icon-prepend" name="update-social-icons"></i> Update </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <script>
+                  document.getElementById('show_social_icons').addEventListener('change', function() {
+                    var socialIconsDiv = document.getElementById('social_icons');
+                    if (this.checked) {
+                      socialIconsDiv.style.display = 'flex';
+                    } else {
+                      socialIconsDiv.style.display = 'none';
+                    }
+                  });
+
+                  // Initialize the visibility based on the checkbox state
+                  document.addEventListener('DOMContentLoaded', function() {
+                    var socialIconsDiv = document.getElementById('social_icons');
+                    var checkbox = document.getElementById('show_social_icons');
+                    socialIconsDiv.style.display = checkbox.checked ? 'flex' : 'none';
+                  });
+                </script>
+
+              </form>
               <button type="submit" class="btn btn-primary btn-icon-text" name="update-home-section">
                 <i class="mdi mdi-file-check btn-icon-prepend"></i> Submit
               </button>
@@ -300,7 +413,7 @@ $user_data = mysqli_fetch_array($run);
                 <label>Profile Picture</label>
                 <input type="file" id="file-upload" class="file-upload-default form-control" name="profile_picture" style="display: none;">
                 <div class="input-group col-xs-12">
-                  <input type="text" class="form-control file-upload-info" placeholder="<?= $user_data['profile_picture'] ?>" readonly>
+                  <input type="text" id="file-upload-info" class="form-control file-upload-info" placeholder="<?= $user_data['profile_picture'] ?>" readonly>
                   <span class="input-group-append">
                     <button class="file-upload-browse btn btn-outline-primary" type="button" onclick="document.getElementById('file-upload').click();"><i class="mdi mdi-upload btn-icon-prepend"></i>Upload</button>
                   </span>
@@ -311,44 +424,20 @@ $user_data = mysqli_fetch_array($run);
                 $(document).ready(function() {
                   $('#file-upload').change(function() {
                     var fileName = $(this).val().split('\\').pop();
-                    $('.file-upload-info').val(fileName);
+                    $('#file-upload-info').val(fileName);
                   });
                 });
               </script>
-
               <button
                 type="submit"
                 class="btn btn-primary btn-icon-text"
                 name="update-about-section">
                 <i class="mdi mdi-file-check btn-icon-prepend"></i> Submit
               </button>
-
-
             </form>
           </div>
 
-          <div class="col-md-6 grid-margin stretch-card">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Social Icon Buttons</h4>
-                <p class="card-description">Add class <code>.btn-social-icon</code></p>
-                <div class="template-demo">
-                  <button type="button" class="btn btn-social-icon btn-outline-dribbble" for="custom-switch-1" name="dribble"><i class="mdi mdi-dribbble"></i></button>
-                  <button type="button" class="btn btn-social-icon btn-outline-success" for="custom-switch-2" name="email">
-                    <i class="mdi mdi-email-open"></i>
-                  </button>
-                  <button type="button" class="btn btn-social-icon btn-outline-facebook" for="custom-switch-3" name="facebook"><i class="mdi mdi-facebook"></i></button>
-                  <button type="button" class="btn btn-social-icon btn-outline-google" for="custom-switch-4" name="google-plus"><i class="mdi mdi-google-plus"></i></button>
 
-                  <button type="button" class="btn btn-social-icon btn-outline-linkedin" for="custom-switch-5" name="linkedin"><i class="mdi mdi-linkedin"></i></button>
-                  <button type="button" class="btn btn-social-icon btn-outline-twitter" for="custom-switch-6" name="twitter"><i class="mdi mdi-twitter"></i></button>
-                  <button type="button" class="btn btn-social-icon btn-outline-youtube" for="custom-switch-7" name="youtube"><i class="mdi mdi-youtube"></i></button>
-                  <button type="submit" class="btn btn-warning btn-icon-text" name="update-social-icons" value="update">
-                    <i class="mdi mdi-reload btn-icon-prepend"></i> Update </button>
-                </div>
-              </div>
-            </div>
-          </div>
           </form>
         </div>
       </div>
